@@ -35,9 +35,7 @@
                         @endif
                         <div class="card-header">
                             <strong class="card-title">{{ $page_name }}</strong>
-                            @permission(['Post Add','All'])
-                            <a href="{{ url('/back/permission/create') }}" class="btn btn-primary pull-right">Create</a>
-                            @endpermission
+                            <a href="{{ url('/back/author/create') }}" class="btn btn-primary pull-right">Create</a>
                         </div>
                         <div class="card-body">
                             <table id="bootstrap-data-table" class="table table-striped table-bordered">
@@ -45,8 +43,8 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>Display Name</th>
-                                    <th>Description</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -55,15 +53,20 @@
                                 <tr>
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $row->name }}</td>
-                                    <td>{{ $row->display_name }}</td>
-                                    <td>{{ $row->description }}</td>
+                                    <td>{{ $row->email }}</td>
                                     <td>
-                                        @permission(['Post Add','All','Post Update'])
-                                        <a href="{{ url('/back/permission/edit/'.$row->id) }}" class="btn btn-info">Edit</a>
-                                        @endpermission
-                                        @permission(['Post Add','All'])
-                                        <a href="{{ url('/back/permission/delete/'.$row->id) }}" class="btn btn-danger">Delete</a>
-                                        @endpermission
+                                        @if($row->roles()->get() )
+                                            <ul style="padding: 20px;margin: 20px;">
+                                                @foreach($row->roles()->get() as $role)
+                                                    <li>{{ $role->name }}</li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ url('/back/author/edit/'.$row->id) }}" class="btn btn-info">Edit</a>
+                                        <a href="{{ url('/back/author/delete/'.$row->id) }}" class="btn btn-danger">Delete</a>
+
                                     </td>
                                 </tr>
                                 @endforeach

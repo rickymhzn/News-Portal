@@ -39,11 +39,10 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name' => 'required|alpha_num'
+            'name' => 'required'
         ],
             [
-           'name.required'=>"Name field is Required",
-            'name.alpha_num'=>"Name field accepts alpha numeric characters"
+           'name.required'=>"Name field is Required"
         ]);
         $permission= new Permission();
         $permission->name = $request->name;
@@ -87,11 +86,10 @@ class PermissionController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'name' => 'required|alpha_num'
+            'name' => 'required'
         ],
             [
                 'name.required'=>"Name field is Required",
-                'name.alpha_num'=>"Name field accepts alpha numeric characters"
             ]);
         $permission= Permission::find($id);
         $permission->name = $request->name;
