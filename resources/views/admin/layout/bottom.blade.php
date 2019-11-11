@@ -11,6 +11,7 @@
 <script src="{{ asset('admin/assets/js/lib/vector-map/jquery.vmap.sampledata.js') }}"></script>
 <script src="{{ asset('admin/assets/js/lib/vector-map/country/jquery.vmap.world.js') }}"></script>
 <script src="{{ asset('admin/assets/js/lib/chosen/chosen.jquery.min.js') }}"></script>
+
 <script>
     ( function ( $ ) {
         "use strict";
@@ -36,5 +37,20 @@
             no_results_text: "Oops, nothing found!",
             width: "100%"
         });
+    });
+</script>
+<!-- CKEditor init -->
+<script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+<script src="/vendor/unisharp/laravel-ckeditor/adapters/jquery.js"></script>
+<script>
+    var route_prefix = "{{ url(config('lfm.url_prefix', config('lfm.prefix'))) }}";
+</script>
+<script>
+    jQuery(".text-editor").ckeditor({
+        height: 180,
+        filebrowserImageBrowseUrl: route_prefix + '?type=Images',
+        filebrowserImageUploadUrl: route_prefix + '/upload?type=Images&_token={{csrf_token()}}',
+        filebrowserBrowseUrl: route_prefix + '?type=Files',
+        filebrowserUploadUrl: route_prefix + '/upload?type=Files&_token={{csrf_token()}}'
     });
 </script>
