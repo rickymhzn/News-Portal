@@ -29,9 +29,14 @@
                     <a href="{{ url('/back/authors') }}"> <i class="menu-icon fa fa-laptop"></i>Authors </a>
                 </li>
                 @endpermission
-                @permission(['Permission List','All'])
+                @permission(['Category List','All'])
                 <li class="active">
                     <a href="{{ url('/back/categories') }}"> <i class="menu-icon fa fa-laptop"></i>Categories </a>
+                </li>
+                @endpermission
+                @permission(['Post List','All'])
+                <li class="active">
+                    <a href="{{ url('/back/posts') }}"> <i class="menu-icon fa fa-laptop"></i>Posts </a>
                 </li>
                 @endpermission
                 {{--<h3 class="menu-title">UI elements</h3><!-- /.menu-title -->--}}
