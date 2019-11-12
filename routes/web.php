@@ -52,6 +52,11 @@ Route::group(['prefix'=>'back','middleware'=>'auth'],function(){
     Route::get('/post/edit/{id}',['uses'=>'Admin\PostController@edit','as'=>'post-edit','middleware' => 'permission:Post Edit|All']);
     Route::post('/post/update/{id}',['uses'=>'Admin\PostController@update','as'=>'post-update','middleware' => 'permission:Post Update|All']);
     Route::get('/post/delete/{id}',['uses'=>'Admin\PostController@destroy','as'=>'post-delete','middleware' => 'permission:Post Delete|All']);
+//Comments
+    Route::get('/post/comment/{id}',['uses'=>'Admin\CommentController@index','as'=>'comment-list','middleware' => 'permission:Comment View|All']);
+    Route::get('/comment/reply/{id}',['uses'=>'Admin\CommentController@reply','as'=>'comment-reply','middleware' => 'permission:Comment Reply|All']);
+    Route::post('/comment/reply',['uses'=>'Admin\CommentController@store','as'=>'comment-store','middleware' => 'permission:Comment Reply|All']);
+    Route::put('/comment/status/{id}',['uses'=>'Admin\CommentController@status','as'=>'comment-status','middleware' => 'permission:Comment Approval|All']);
 
 });
 
