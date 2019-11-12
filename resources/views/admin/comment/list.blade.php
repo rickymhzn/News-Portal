@@ -35,40 +35,30 @@
                         @endif
                         <div class="card-header">
                             <strong class="card-title">{{ $page_name }}</strong>
-                            @permission(['Post Add','All'])
-                            <a href="{{ url('/back/post/create') }}" class="btn btn-primary pull-right">Create</a>
-                            @endpermission
                         </div>
                         <div class="card-body">
                             <table id="bootstrap-data-table" class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Image</th>
-                                    <th>Title</th>
-                                    <th>Author</th>
-                                    <th>Total View</th>
+                                    <th>Name</th>
+                                    <th>Post</th>
+                                    <th>Comment</th>
                                     <th>Status</th>
-                                    <th>Hot News</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($data as $i=>$row)
                                     <tr>
-                                        <td style="width: 5%;">{{ ++$i }}</td>
+                                        <td>{{ ++$i }}</td>
+                                        <td>{{ $row->name }}</td>
+                                        <td>{{ $row->post->title }}</td>
                                         <td>
-                                           @if(file_exists(public_path('/post/'.$row->thumb_image)))
-                                               <img src="{{ asset('post') }}/{{ $row->thumb_image }}" class="img-fluid">
-                                               @endif
+                                            {{ $row->comment }}
                                         </td>
-                                        <td style="width: 10%;">{{ $row->title }}</td>
-                                        <td style="width: 5%;">
-                                            {{ $row->creator->name }}
-                                        </td>
-                                        <td style="width: 5%;">{{ $row->view_count }}</td>
                                         <td>
-                                            {{ Form::open(['method'=>'PUT','url'=>['/back/post/status/'.$row->id],'style'=>'display:inline']) }}
+                                            {{ Form::open(['method'=>'PUT','url'=>['/back/comment/status/'.$row->id],'style'=>'display:inline']) }}
                                             @if($row->status === 1)
                                                 {{ Form::submit('Unpublish',['class'=>'btn btn-danger']) }}
                                             @else
@@ -77,26 +67,9 @@
                                             {{ Form::close() }}
                                         </td>
                                         <td>
-                                            {{ Form::open(['method'=>'PUT','url'=>['/back/post/hot/news/'.$row->id],'style'=>'display:inline']) }}
-                                            @if($row->hot_news === 1)
-                                                {{ Form::submit('No',['class'=>'btn btn-danger']) }}
-                                            @else
-                                                {{ Form::submit('Yes',['class'=>'btn btn-success']) }}
-                                            @endif
-                                            {{ Form::close() }}
-                                        </td>
-                                        <td>
-                                            @permission(['Comment View','All'])
-                                            <a href="{{ url('/back/post/comment/'.$row->id) }}"
-                                               class="btn btn-primary">Comment</a>
-                                            @endpermission
-                                            @permission(['Post Add','All','Post Update'])
-                                            <a href="{{ url('/back/post/edit/'.$row->id) }}" class="btn btn-info">Edit</a>
-                                            @endpermission
-                                            @permission(['Post Add','All'])
-                                            <a href="{{ url('/back/post/delete/'.$row->id) }}"
-                                               class="btn btn-danger">Delete</a>
-                                            @endpermission
+
+                                            <a href="{{ url('/back/comment/reply/'.$row->post_id) }}"
+                                               class="btn btn-danger">Reply</a>
                                         </td>
                                     </tr>
                                 @endforeach
