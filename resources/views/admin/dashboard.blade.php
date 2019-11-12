@@ -13,6 +13,9 @@
             <div class="page-title">
                 <ol class="breadcrumb text-right">
                     <li class="active">Dashboard</li>
+                    @php
+                        print_r($shareData);
+                    @endphp
                 </ol>
             </div>
         </div>

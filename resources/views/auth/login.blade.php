@@ -6,13 +6,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-{{--    <title>{{ $shareData['system_name'] }}</title>--}}
+    <title>{{ $shareData['system_name'] }}</title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="apple-icon.png">
-{{--    <link rel="shortcut icon" href="{{ asset('public/others') }}/{{ $shareData['favicon'] }}">--}}
-
+    <link rel="shortcut icon" href="{{ asset('others') }}/{{ $shareData['favicon'] }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/css/normalize.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/css/font-awesome.min.css') }}">
@@ -35,7 +34,7 @@
         <div class="login-content">
             <div class="login-logo">
                 <a href="index.html">
-                    <img src="{{asset('admin/images/logo.png')}}">
+                    <img src="{{ asset('others')  }}/{{ $shareData['admin_logo'] }}">
 {{--                    <img class="align-content" src="{{ asset('public/others') }}/{{ $shareData['admin_logo'] }}" alt="">--}}
                 </a>
             </div>
