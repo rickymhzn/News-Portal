@@ -75,4 +75,5 @@ Route::get('/','HomePageController@index');
 Route::get('/category/{id}','ListingPageController@listing');
 Route::get('/author/{id}','ListingPageController@listing');
 Route::get('/listing','ListingPageController@index');
-Route::get('/details','DetailsPageController@index');
+Route::get('/details/{slug}','DetailsPageController@index');
+
