@@ -72,5 +72,7 @@ Route::get('/test', function(){
 ;
 //Frontend Controllers
 Route::get('/','HomePageController@index');
+Route::get('/category/{id}','ListingPageController@listing');
+Route::get('/author/{id}','ListingPageController@listing');
 Route::get('/listing','ListingPageController@index');
 Route::get('/details','DetailsPageController@index');
