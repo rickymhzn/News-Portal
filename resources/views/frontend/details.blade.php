@@ -11,7 +11,7 @@
                         <!-- entity_title -->
 
                         <div class="entity_meta"> {{ date('F j, Y',strtotime($post->created_at)) }}, by: <a
-                                    href="{{ url('/author') }}/{{ $post->creator->id }}">{{ $post->creator->name }}</a>
+                                    href="{{ url('/author') }}/{{ $post->creator->id }}">{{ $post->creator['name'] }}</a>
                         </div>
                         <!-- entity_meta -->
 
@@ -60,13 +60,13 @@
                                         </div>
                                         <div class="media-body">
                                             <span class="tag purple"><a
-                                                        href="{{ url('/category') }}/{{ $news->category_id }}">{{ $news->category->name }}</a></span>
+                                                        href="{{ url('/category') }}/{{ $news->category_id }}">{{ $news->category['name'] }}</a></span>
 
                                             <h3 class="media-heading"><a
                                                         href="{{ url('/details') }}/{{ $news->slug }}">{{ $news->title }}</a>
                                             </h3>
                                             <span class="media-date">{{ date('F j, Y',strtotime($news->created_at)) }},  by: <a
-                                                        href="{{ url('/author') }}/{{ $news->creator->id }}">{{ $news->creator->name }}</a></span>
+                                                        href="{{ url('/author') }}/{{ $news->creator->id }}">{{ $news->creator['name'] }}</a></span>
 
                                             <div class="media_social">
                                                 <span><i class="fa fa-comments-o"></i>{{ count($news->comments) }} <a
@@ -92,6 +92,7 @@
                         </div>
                         <!-- entity_title -->
                         @foreach($post->comments as $comment)
+                            @if($comment->status === 1)
                             <div class="media">
                                 <div class="media-left">
                                     <a href="#">
@@ -106,6 +107,7 @@
 
                             </div>
                             <!-- media end -->
+                            @endif
                         @endforeach
                     </div>
 
@@ -124,19 +126,19 @@
                         <!--Entity Title -->
 
                         <div class="entity_comment_from">
-                            <form>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="inputName" placeholder="Name">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="inputEmail" placeholder="Email">
-                                </div>
-                                <div class="form-group comment">
-                                    <textarea class="form-control" id="inputComment" placeholder="Comment"></textarea>
-                                </div>
-
-                                <button type="submit" class="btn btn-submit red">Submit</button>
-                            </form>
+                            {{ Form::open(array('url'=>'/comments','method'=>'post')) }}
+                            {{ Form::hidden('slug',$post->slug) }}
+                            {{ Form::hidden('post_id',$post->id) }}
+                            <div class="form-group">
+                                {{ Form::label('name','Name',array('class'=>'control-label mb-1')) }}
+                                {{ Form::text('name',null,['class'=>'form-control','id'=>'name','placeholder' => 'Name']) }}
+                            </div>
+                            <div class="form-group">
+                                {{ Form::label('comment','Comment',array('class'=>'control-label mb-1')) }}
+                                {{ Form::textarea('comment',null,['class'=>'form-control','id'=>'comment','placeholder'=>'Comment']) }}
+                            </div>
+                             <button type="submit" class="btn btn-submit red">Submit</button>
+                            {{ Form::close() }}
                         </div>
                         <!--Entity Comments From -->
 
@@ -164,7 +166,7 @@
                                            target="_self">{{ $item->title }}</a>
                                     </h3> <span class="media-date">
                                     <a href="#">{{ date('j F -y',strtotime($item->created_at)) }}</a>,  by: <a
-                                                href="{{ url('/author') }}/{{ $item->creator->id }}">{{ $item->creator->name }}</a></span>
+                                                href="{{ url('/author') }}/{{ $item->creator->id }}">{{ $item->creator['name'] }}</a></span>
 
                                     <div class="widget_article_social">
                                                   <span>
