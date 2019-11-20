@@ -72,8 +72,9 @@ Route::get('/test', function(){
 ;
 //Frontend Controllers
 Route::get('/','HomePageController@index');
-Route::get('/category/{id}','ListingPageController@listing');
+Route::get('/category/{id}','ListingPageController@listing1');
 Route::get('/author/{id}','ListingPageController@listing');
 Route::get('/listing','ListingPageController@index');
-Route::get('/details/{slug}','DetailsPageController@index');
+Route::get('/details/{slug}','DetailsPageController@index')->name('details');
+Route::post('/comments','DetailsPageController@comment');
 

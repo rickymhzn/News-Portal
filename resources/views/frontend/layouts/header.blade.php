@@ -95,9 +95,9 @@
                             @foreach($shareData['categories'] as $category)
                             <li><a href="{{ url('/category') }}/{{ $category->id }}">{{ $category->name }}</a></li>
                             @endforeach
-                            @foreach($shareData['authors'] as $author)
-                                <li><a href="{{ url('/author') }}/{{ $author->id }}">{{ $author->name }}</a></li>
-                            @endforeach
+                            {{--@foreach($shareData['authors'] as $author)--}}
+                                {{--<li><a href="{{ url('/author') }}/{{ $author->id }}">{{ $author->name }}</a></li>--}}
+                            {{--@endforeach--}}
                         </ul>
                     </div>
                     <!-- .navbar-collapse -->
